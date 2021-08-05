@@ -1,0 +1,18 @@
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Bosses</th>
+            <th><div (click)="onSortClicked('combo')">Permutations</div></th>
+            <th><div (click)="onSortClicked('time')">Time</div></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let combo of service.selectedData?.combinations">
+            <td class="boss-container">
+                <div class="boss ss-info" *ngFor="let b of combo.bosses" style="font-size:0.87em;">{{b.name}}</div>
+            </td>
+            <td>{{combo.permutations}} ({{(combo.probability || 0) * 100 | number:'1.1-1'}}%)</td>
+            <td>{{combo.time | number:'1.1-1'}}</td>
+        </tr>
+    </tbody>
+</table>

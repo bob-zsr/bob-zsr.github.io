@@ -1,0 +1,44 @@
+div.tab {
+    display:flex;
+    flex-direction:column;
+}
+
+.master {
+    margin: 0 1rem 1rem;
+
+    >:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+
+.card-info {
+    display:flex;
+}
+
+div.lists {
+    white-space:nowrap;
+}
+
+ss-fi ul {
+    list-style:none;
+    margin:auto;
+}
+
+ss-fi>* {
+    margin:auto;
+}
+
+#page-data {
+    max-width: 98%;
+    overflow: hidden;
+}
+
+@media (max-width: 750px) {
+    ul {
+        padding-left: 15px;
+    }
+
+    ss-fi>span {
+        font-size: 0.5rem;
+    }
+}

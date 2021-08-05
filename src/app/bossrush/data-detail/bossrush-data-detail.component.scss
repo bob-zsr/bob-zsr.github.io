@@ -1,0 +1,11 @@
+.btn.btn-ss {
+    margin-right:10px;
+}
+
+.boss-container {
+    display:flex;
+    flex-wrap: wrap;
+    >* {
+        margin: 2px;
+    }
+}

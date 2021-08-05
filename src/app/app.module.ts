@@ -1,8 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { BossrushModule } from './bossrush';
+import { BossrushComponent } from './bossrush/bossrush.component';
+import { SkywardSwordModule } from './skywardsword/skywardsword.module';
+
+const routes: Routes = [
+  {
+    path: 'bossrush', component: BossrushComponent
+  },
+  {
+    path: '', redirectTo: 'bossrush', pathMatch: 'full'
+  }
+];
 
 @NgModule({
   declarations: [
@@ -10,7 +21,9 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BossrushModule,
+    SkywardSwordModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

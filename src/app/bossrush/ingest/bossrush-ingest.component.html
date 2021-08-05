@@ -1,0 +1,58 @@
+<div class="ingest">
+    <ss-form-control label="How many?">
+        <select class="form-control" [(ngModel)]="service.count" (ngModelChange)="onCountChanged($event)">
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+        </select>
+    </ss-form-control>
+    <ss-form-control label="Start set of 8">
+        <select class="form-control" [(ngModel)]="service.restartBoss8Id" (change)="service.refresh()">
+            <option *ngFor="let boss of service.allBosses" [value]="boss.id">{{boss.name}}</option>
+        </select>
+    </ss-form-control>
+    <ss-form-control label="Start set of 4">
+        <select class="form-control" [(ngModel)]="service.restartBoss4Id" (change)="service.refresh()">
+            <option *ngFor="let boss of service.allBosses" [value]="boss.id">{{boss.name}}</option>
+        </select>
+    </ss-form-control>
+    <ss-form-control *ngIf="service.bosses.length === 0" label="First boss:">
+        <select class="form-control" [(ngModel)]="first" (change)="onFirstBossSelected($event)">
+            <option *ngFor="let boss of service.allBosses" [value]="boss.id">{{boss.name}}</option>
+        </select>
+    </ss-form-control>
+    <div *ngIf="service.bosses.length" class="ingest-body">
+        <div class="ss-card">
+            <div class="completedBossesList">
+                <ss-scroll><h2>Completed Bosses</h2></ss-scroll>
+                <div class="completedBossesContainer">
+                    <div *ngFor="let boss of service.bosses; index as i;" class="btn btn-ss no-interact"><span>{{i+1}}. {{boss.name}}</span></div>
+                </div>
+                <button class="btn btn-ss" (click)="back()">&lt;&lt; Back</button>
+            </div>
+        </div>
+        <div *ngIf="service.result === undefined" class="ss-card">
+            <div>
+                <ss-scroll><h2>Remaining Boss Lists</h2></ss-scroll>
+                <div class="remainingBossesList">
+                    <ng-container *ngTemplateOutlet="remainingBossesTemplate;context:service.remainingList0"></ng-container>
+                    <ng-container *ngTemplateOutlet="remainingBossesTemplate;context:service.remainingList1"></ng-container>
+                    <ng-container *ngTemplateOutlet="remainingBossesTemplate;context:service.remainingList2"></ng-container>
+                </div>
+                <ng-template #remainingBossesTemplate let-bosses="list">
+                    <div class="singleRemainingBossList">
+                        <button *ngFor="let boss of bosses; index as i;" class="btn btn-ss" (click)="service.nextBoss(boss)" [disabled]="i>0">{{boss.name}}</button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

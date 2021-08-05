@@ -1,0 +1,92 @@
+.completedBossesList {
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    >*{
+        margin-bottom:5px;
+    }
+    :last-child {
+        margin-bottom:0px;
+    }
+}
+
+div.ingest {
+    display:flex;
+    flex-direction:column;
+}
+
+ss-form-control {
+    margin:0;
+    padding:0;
+}
+
+div.remainingBossesList {
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly;
+    >* {
+        margin: 5px 0px;
+    }
+}
+
+.singleRemainingBossList {
+    display:flex;
+    overflow:hidden;
+    >button.btn-ss {
+        font-size:0.875em;
+    }
+}
+
+button.btn-ss {
+    margin-right:4px;
+}
+
+h2 {
+    text-align:center;
+    margin:auto;
+}
+
+.ingest-body {
+    display: flex;
+    >* {
+        margin-bottom: 5px;
+    }
+}
+
+div.completedBossesContainer {
+    display:grid;
+    grid-template-columns: 1fr;
+}
+
+@media (max-width:750px) {
+    div.completedBossesContainer {
+        grid-template-columns: 1fr 1fr;
+        gap: 3px;
+
+        .btn-ss:last-child:nth-child(odd) {
+            grid-column: 1 / 3;
+        }
+    }
+
+    .ingest-body {
+        flex-direction: column;
+    }
+
+    button.btn-ss {
+        margin-right: 0;
+        margin-bottom: 4px;
+    }
+
+    div.remainingBossesList {
+        flex-direction:row;
+        >*:not(:last-child) {
+            margin-bottom:0px;
+            margin-right:5px;
+        }
+    }
+
+    .singleRemainingBossList {
+        flex-direction:column;
+    }
+}

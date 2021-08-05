@@ -1,0 +1,77 @@
+<div class="master">
+  <ss-fi *ngIf="service.recommendation !== undefined || service.result !== undefined || service.selectedData" class="ss-card">
+    <span *ngIf="service.result !== undefined">Master, this set of {{service.count}} was faster than, or as fast as, <span class="probability">{{(service.result || 0) * 100 | number:'1.1-1'}}%</span> of possibilities starting with <span class="action">{{service.bosses[0].name}}.</span></span>
+    <ul *ngIf="service.result === undefined">
+      <li>
+        <span *ngIf="service.recommendation !== undefined && service.recommendation >= 0.5">Master, there is a <span class="probability">{{(service.recommendation || 0) * 100 | number:'1.1-1'}}%</span> chance that you should <span class="action">take this set of 4.</span></span>
+        <span *ngIf="service.recommendation !== undefined && service.recommendation < 0.5">Master, there is a <span class="probability">{{(1 - (service.recommendation || 0)) * 100 | number:'1.1-1'}}%</span> chance that you should <span class="action">continue for this set of 8.</span></span>
+      </li>
+      <li *ngIf="service.settings.showExpected">
+        <span>Your expected total time is <span class="probability">{{service.selectedData?.ev | number:'1.1-1'}}</span></span>
+      </li>
+      <li *ngIf="service.settings.showBest">
+        <span>Your best possible total time is <span class="probability">{{service.selectedData?.bestTime.time | number:'1.1-1'}} ({{service.selectedData.bestTime.probability * 100 | number:'1.1-1'}}%)</span></span>
+      </li>
+      <li *ngIf="service.settings.showWorst">
+        <span>Your worst possible total time is <span class="probability">{{service.selectedData?.worstTime.time | number:'1.1-1'}} ({{service.selectedData.worstTime.probability * 100 | number:'1.1-1'}}%)</span></span>
+      </li>
+      <li *ngIf="service.settings.showMedian">
+        <span>Your median total time is <span class="probability">{{service.selectedData?.medianTime | number:'1.1-1'}}</span></span>
+      </li>
+      <li *ngIf="service.settings.showWillSee && service.selectedData?.willSee.length">
+        You will encounter <span class="action" *ngFor="let b of service.selectedData?.willSee">{{b.name}}</span>
+      </li>
+      <li *ngIf="service.settings.showWontSee && service.selectedData.wontSee.length">
+        You will not encounter <span class="action" *ngFor="let b of service.selectedData?.wontSee">{{b.name}}</span>
+      </li>
+      <ng-container *ngFor="let boss of service.allBosses">
+          <li *ngIf="service.settings.showBosses[boss.id] && service.selectedData.probabilities">
+            <span>Probability of <span class="action">{{boss.name}}</span>: <span class="probability">{{service.selectedData.probabilities[boss.id] * 100 | number:'1.1-1' }}%</span></span>
+          </li>
+      </ng-container>
+    </ul>
+  </ss-fi>
+  <div class="ss-card">
+    <div>
+      <app-bossrush-ingest></app-bossrush-ingest>
+    </div>
+  </div>
+  <div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active':page==='data'}" (click)="page='data'">Data</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active':page==='settings'}" (click)="page='settings'">Settings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active':page==='info'}" (click)="page='info'">Info</a>
+      </li>
+    </ul>
+    <div class="card">
+      <ng-container [ngSwitch]="page">
+        <div *ngSwitchCase="'data'" id="page-data" class="card-body">
+          <app-bossrush-data-summary *ngIf="!service.bosses || !service.bosses.length"></app-bossrush-data-summary>
+          <app-bossrush-data-detail *ngIf="service.bosses && service.bosses.length"></app-bossrush-data-detail>
+        </div>
+        <div *ngSwitchCase="'settings'" class="card-body">
+          <app-bossrush-settings></app-bossrush-settings>
+        </div>
+        <div *ngSwitchCase="'info'" class="card-body">
+          Boss rush progression is explained <a href="https://pastebin.com/dJqLX19p">in this pastebin</a>. Basically, the player chooses the first boss, and each subsequent boss is chosen by the game selecting one of the following lists at random and picking the first boss on the list that has not yet been fought in this attempt.
+          <div class="card-info lists">
+            <ul>
+              <li *ngFor="let boss of service.list0">{{boss?.name}}</li>
+            </ul>
+            <ul>
+              <li *ngFor="let boss of service.list1">{{boss?.name}}</li>
+            </ul>
+            <ul>
+              <li *ngFor="let boss of service.list2">{{boss?.name}}</li>
+            </ul>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

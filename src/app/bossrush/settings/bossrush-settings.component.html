@@ -1,0 +1,25 @@
+<div class="btn btn-ss btn-md" (click)="service.resetSettings()">Reset Settings</div>
+<ss-switch [(ngModel)]="service.settings.showExpected" (ngModelChange)="service.refresh()" label="Display Expected Time"></ss-switch>
+<ss-switch [(ngModel)]="service.settings.showBest" (ngModelChange)="service.refresh()" label="Display Best Possible Time"></ss-switch>
+<ss-switch [(ngModel)]="service.settings.showWorst" (ngModelChange)="service.refresh()" label="Display Worst Possible Time"></ss-switch>
+<ss-switch [(ngModel)]="service.settings.showMedian" (ngModelChange)="service.refresh()" label="Display Median Possible Time"></ss-switch>
+<ss-switch [(ngModel)]="service.settings.showWillSee" (ngModelChange)="service.refresh()" label="Display Will-see Bosses"></ss-switch>
+<ss-switch [(ngModel)]="service.settings.showWontSee" (ngModelChange)="service.refresh()" label="Display Won't-see Bosses"></ss-switch>
+<table class="table table-sm">
+    <tr>
+        <th>Boss</th>
+        <th>RTA Time</th>
+        <th>Display Probability</th>
+    </tr>
+    <tr *ngFor="let boss of service.allBosses">
+        <td>
+            <div class="boss btn btn-md btn-ss no-interact">{{boss.name}}</div>
+        </td>
+        <td>
+            <div>
+                <input type="number" min="0" [(ngModel)]="service.settings.bossTimes[boss.id]" (ngModelChange)="service.refresh()"/>
+            </div>
+        </td>
+        <td><ss-switch [(ngModel)]="service.settings.showBosses[boss.id]" (ngModelChange)="service.refresh()"></ss-switch></td>
+    </tr>
+</table>

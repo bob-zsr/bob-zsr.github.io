@@ -1,0 +1,29 @@
+.fi {
+    background-image: url('../assets/fi-bg.svg');
+    min-height:250px;
+    display:flex;
+    align-items: center;
+    font-size:2rem;
+}
+
+.fi-inner {
+    margin:auto;
+    color: white;
+    display:flex;
+}
+
+@media (max-width:750px) {
+    .fi {
+        min-height:0;
+        font-size:0.75rem;
+        padding: 5px;
+    }
+
+    .fi-inner {
+        line-height:15px;
+    }
+
+    img {
+        display:none;
+    }
+}

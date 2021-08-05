@@ -1,0 +1,109 @@
+* {
+    font-family:'Calisto MT', Calisto, Times, serif;
+}
+
+.ss-card {
+    background-color:white;
+    border: rgba(0, 0, 0, 0.125) 1px solid;
+    border-radius: 4px;
+    color: rgb(33, 37, 41);
+    display: flex;
+    flex-direction:column;
+    background-clip: border-box;
+    >:only-child {
+        flex:1 1 auto;
+        padding: 20px;
+    }
+}
+
+.ss-info {
+    background-color: rgb(127,110,68);
+    color: rgb(255,251,233);
+    user-select: none;
+    border: rgb(200,180,136) 2px solid;
+    >* {
+        text-align:center;
+    }
+}
+
+.btn.btn-ss {
+    box-sizing: border-box;
+    border-color: rgb(199,178,127);
+    border-radius: 5px;
+    border-width: 6px;
+    opacity: 80%;
+    color: rgb(190,177,155);
+    background-image: radial-gradient(rgb(60,45,25), rgb(33,13,0));
+    padding: 9px;
+    cursor: pointer;
+
+    &.btn-sm {
+        font-size: 0.75rem;
+        border-width:3px;
+        padding: 3px;
+    }
+
+    &.btn-md {
+        font-size:0.875rem;
+        border-width:4px;
+        padding:6px;
+    }
+
+    &:hover:not(.no-interact) {
+        &:not(button),&:enabled {
+            border-color: rgb(253,247,193);
+            color: rgb(254,239,194);
+            border-width: 8px;
+            padding: 7px;
+            background-image: radial-gradient(rgb(190,157,108), rgb(163,136,86));
+
+            &.btn-sm {
+                border-width:4px;
+                padding: 2px;
+            }
+
+            &.btn-md {
+                border-width: 6px;
+                padding:4px;
+            }
+        }
+    }
+
+    &.no-interact {
+        cursor:auto;
+    }
+
+    &:not(:enabled) {
+        opacity: 60%;
+        cursor:auto;
+        &:hover {
+            color: rgb(190,177,155);
+        }
+        &:not(button) {
+            opacity: 80%;
+        }
+    }
+}
+
+.fi {
+    span.probability {
+        font-weight: 800;
+        color:navy;
+    }
+    span.action {
+        color:#900;
+    }
+}
+
+@media (max-width: 750px) {
+    .ss-card {
+        border: none;
+        >:only-child {
+            padding: 0;
+        }
+    }
+    
+    .ss-info {
+        font-size:1rem;
+    }
+}

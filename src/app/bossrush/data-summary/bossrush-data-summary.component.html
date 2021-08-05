@@ -1,0 +1,20 @@
+<table id="boss-summary" class="table table-hover">
+    <thead>
+        <tr>
+            <th><a (click)="onSortClicked('')">Starting Boss</a></th>
+            <th><a (click)="onSortClicked('best')">Best Time</a></th>
+            <th><a (click)="onSortClicked('ev')">Expected Time</a></th>
+            <th><a (click)="onSortClicked('worst')">Worst Time</a></th>
+            <th><a (click)="onSortClicked('median')">Median Time</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let datum of service.data" (click)="service.nextBoss(datum.startingBosses[0])">
+            <td><div class="boss btn btn-md btn-ss no-interact">{{datum.startingBosses[0].name}}</div></td>
+            <td>{{datum.bestTime.time | number:'1.1-1'}} ({{datum.bestTime.probability * 100 | number:'1.1-1'}}%)</td>
+            <td>{{datum.ev | number:'1.1-1'}}</td>
+            <td>{{datum.worstTime.time | number:'1.1-1'}} ({{datum.worstTime.probability * 100 | number:'1.1-1'}}%)</td>
+            <td>{{datum.medianTime | number:'1.1-1'}}</td>
+        </tr>
+    </tbody>
+</table>
