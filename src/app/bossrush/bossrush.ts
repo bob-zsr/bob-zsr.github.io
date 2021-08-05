@@ -373,6 +373,7 @@ export function getCombinations(settings: Settings, bosses: Boss[], count: numbe
 
         probabilities[boss.id] = combosWithBoss / totalCombos;
     });
+    combinations.sort((a, b) => a.time - b.time);
 
     return {
         startingBosses: bosses,
